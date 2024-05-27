@@ -15,15 +15,15 @@ if (savedState) {
   }
 }
 
-formFeed.addEventListener('input', throttle((event) => {
-  const { email: {value: email}, message: {value: message} } = event.currentTarget;
+const { email, message } = formFeed.elements;
 
+formFeed.addEventListener('input', throttle((event) => {
   const feedBack = {
-    email,
-    message,
+    email: email.value,
+    message: message.value,
   };
   localStorage.setItem('feedback-form-state', JSON.stringify(feedBack));
-}, 500, { 'trailing': false }));
+}, 500));
 
 formFeed.addEventListener('submit', (event) => {
   event.preventDefault();
